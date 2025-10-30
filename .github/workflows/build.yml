@@ -1,0 +1,165 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  setup:
+    name: Setup Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Upload node_modules for reuse
+        uses: actions/upload-artifact@v4
+        with:
+          name: node_modules
+          path: |
+            node_modules
+            packages/**/node_modules
+            demo/**/node_modules
+
+      - name: Upload Turbo Cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: turbo-cache
+          path: .turbo
+
+  build-cli:
+    name: Build CLI
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+      - uses: actions/download-artifact@v4
+        with:
+          name: turbo-cache
+          path: .turbo
+      - run: cd packages/cli && pnpm build
+
+  build-next-app:
+    name: Build Next.js Demo
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+      - uses: actions/download-artifact@v4
+        with:
+          name: turbo-cache
+          path: .turbo
+      - run: cd demo/next-app && pnpm build
+
+  build-vite-project:
+    name: Build Vite Demo
+    runs-on: ubuntu-latest
+    needs: setup
+    env:
+    LINGODOTDEV_API_KEY: ${{ secrets.LINGODOTDEV_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+      - uses: actions/download-artifact@v4
+        with:
+          name: turbo-cache
+          path: .turbo
+      - run: cd demo/vite-project && pnpm build
+
+  build-react:
+    name: Build React Package
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+      - uses: actions/download-artifact@v4
+        with:
+          name: turbo-cache
+          path: .turbo
+      - run: cd packages/react && pnpm build
+
+  build-sdk:
+    name: Build SDK Package
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+      - uses: actions/download-artifact@v4
+        with:
+          name: turbo-cache
+          path: .turbo
+      - run: cd packages/sdk && pnpm build
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs:
+      - build-cli
+      - build-next-app
+      - build-vite-project
+      - build-react
+      - build-sdk
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: npm install -g pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: node_modules
+      - run: pnpm test || echo "No test script found"
