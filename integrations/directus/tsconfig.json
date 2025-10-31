@@ -11,7 +11,15 @@
     "module": "ESNext",
     "target": "ESNext",
     "rootDir": "src",
-    "outDir": "build"
+    "outDir": "build",
+    "baseUrl": ".",                           
+    "paths": {
+      "@lingo.dev/*": ["packages/*"],      
+      "@lingo.dev/_spec": ["packages/spec/src"],  
+      "@lingo.dev/_sdk": ["packages/sdk/src"],
+      "@lingo.dev/_react/*": ["packages/react/src/*"],
+      "@lingo.dev/_locales": ["packages/locales/src"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["src/**/*.spec.ts", "src/**/*.spec.tsx"]
