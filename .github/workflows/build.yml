@@ -82,7 +82,7 @@ jobs:
             ${{ runner.os }}-turbo-
       - run: cd packages/compiler && pnpm build
 
-  build-locale-codes:
+  build-locales:
     name: Build Locale Codes Package
     runs-on: ubuntu-latest
     needs: setup
@@ -103,12 +103,12 @@ jobs:
           key: ${{ runner.os }}-turbo-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-turbo-
-      - run: cd packages/locale-codes && pnpm build
+      - run: cd packages/locales && pnpm build
 
   build-sdk:
     name: Build SDK Package
     runs-on: ubuntu-latest
-    needs: [setup, build-react, build-compiler, build-locale-codes]
+    needs: [setup, build-react, build-compiler, build-locales]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -131,7 +131,7 @@ jobs:
   build-cli:
     name: Build CLI
     runs-on: ubuntu-latest
-    needs: [setup, build-react, build-compiler, build-sdk, build-locale-codes]
+    needs: [setup, build-react, build-compiler, build-sdk, build-locales]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -207,7 +207,7 @@ jobs:
       - build-react
       - build-sdk
       - build-compiler
-      - build-locale-codes
+      - build-locales
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
