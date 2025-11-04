@@ -14,6 +14,7 @@
     "target": "ESNext",
     "allowUnreachableCode": true,
     "baseUrl": ".",
+    "composite": true,
     "paths": {
       "@lingo.dev/*":["../*/src"],
       

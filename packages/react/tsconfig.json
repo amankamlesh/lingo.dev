@@ -16,7 +16,8 @@
     "module": "ESNext",
     "target": "ESNext",
     "types": ["vitest/globals", "@testing-library/react"],
-    "allowUnreachableCode": true
+    "allowUnreachableCode": true,
+    "composite": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": []

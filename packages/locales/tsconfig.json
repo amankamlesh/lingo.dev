@@ -13,7 +13,8 @@
     "moduleResolution": "Bundler",
     "module": "ESNext",
     "target": "ESNext",
-    "allowUnreachableCode": true
+    "allowUnreachableCode": true,
+    "composite": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"]
