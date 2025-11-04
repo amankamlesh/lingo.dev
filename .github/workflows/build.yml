@@ -17,14 +17,14 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js and Restore pnpm Store Cache
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Cache Turborepo
         uses: actions/cache@v4
@@ -34,14 +34,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
 
-      - name: Upload node_modules for reuse
-        uses: actions/upload-artifact@v4
-        with:
-          name: node_modules
-          path: |
-            node_modules
-            packages/**/node_modules
-            demo/**/node_modules
+      # - name: Upload node_modules for reuse
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: node_modules
+      #     path: |
+      #       node_modules
+      #       packages/**/node_modules
+      #       demo/**/node_modules
 
   build-cli:
     name: Build CLI
@@ -55,10 +55,11 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: node_modules
-
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: node_modules
+      - name: Recreate pnpm symlinks from cache
+        run: pnpm install --frozen-lockfile
       - name: Restore turbo cache
         uses: actions/cache@v4
         with:
@@ -80,9 +81,11 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - uses: actions/download-artifact@v4
-        with:
-          name: node_modules
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: node_modules
+      - name: Recreate pnpm symlinks from cache
+        run: pnpm install --frozen-lockfile
       - name: Restore turbo cache
         uses: actions/cache@v4
         with:
@@ -103,9 +106,11 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - uses: actions/download-artifact@v4
-        with:
-          name: node_modules
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: node_modules
+      - name: Recreate pnpm symlinks from cache
+        run: pnpm install --frozen-lockfile
       - name: Restore turbo cache
         uses: actions/cache@v4
         with:
@@ -126,9 +131,11 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - uses: actions/download-artifact@v4
-        with:
-          name: node_modules
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: node_modules
+      - name: Recreate pnpm symlinks from cache
+        run: pnpm install --frozen-lockfile
       - name: Restore turbo cache
         uses: actions/cache@v4
         with:
@@ -149,9 +156,11 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - uses: actions/download-artifact@v4
-        with:
-          name: node_modules
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: node_modules
+      - name: Recreate pnpm symlinks from cache
+        run: pnpm install --frozen-lockfile
       - name: Restore turbo cache
         uses: actions/cache@v4
         with:
@@ -177,9 +186,11 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - uses: actions/download-artifact@v4
-        with:
-          name: node_modules
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: node_modules
+      - name: Recreate pnpm symlinks from cache
+        run: pnpm install --frozen-lockfile
       - name: Restore turbo cache
         uses: actions/cache@v4
         with:
