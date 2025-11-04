@@ -13,21 +13,19 @@
     "module": "ESNext",
     "target": "ESNext",
     "allowUnreachableCode": true,
-    "baseUrl": ".",
     "composite": true,
+    "baseUrl": ".",
     "paths": {
-      "@lingo.dev/*":["../*/src"],
-      
       "@lingo.dev/_spec": ["../spec/src"],
-      "@lingo.dev/_sdk": ["../sdk/src"],
-      "@lingo.dev/_locales": ["../locales/src"],
-      "@lingo.dev/_react": ["../react/src"],
-      
-      "@lingo.dev/_react/client": ["../react/src/client"],
-      "@lingo.dev/_react/react-router": ["../react/src/react-router"],
-      "@lingo.dev/_react/rsc": ["../react/src/rsc"]
+      "@lingo.dev/_sdk": ["../sdk/src"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "types","../spec/src/**/*.ts","../sdk/src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "types",
+    "../spec/src/**/*.ts",
+    "../sdk/src/**/*.ts"
+  ],
   "exclude": ["src/**/*.spec.ts", "src/**/*.spec.tsx"]
 }
