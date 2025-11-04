@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "build",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -10,12 +8,19 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "jsx": "react-jsx",
     "moduleResolution": "Bundler",
     "module": "ESNext",
     "target": "ESNext",
     "allowUnreachableCode": true,
-    "composite": true
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {}
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.tsx", 
+    "types"
+  ],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.spec.tsx"]
 }

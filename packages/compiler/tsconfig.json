@@ -28,6 +28,6 @@
       "@lingo.dev/_react/rsc": ["../react/src/rsc"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "types"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "types","../spec/src/**/*.ts","../sdk/src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts", "src/**/*.spec.tsx"]
 }
