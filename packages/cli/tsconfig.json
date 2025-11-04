@@ -15,15 +15,11 @@
     "allowUnreachableCode": true,
     "baseUrl": ".", 
     "paths": {
-      
-      "@lingo.dev/_react": ["../react/src/index.ts"],
-      
+      "@lingo.dev/_react": ["../react/src"],
       "@lingo.dev/_spec": ["../spec/src"],
       "@lingo.dev/_sdk": ["../sdk/src"],
       "@lingo.dev/_compiler": ["../compiler/src"],
       "@lingo.dev/_locales": ["../locales/src"],
-      
-   
       "@lingo.dev/_react/client": ["../react/src/client"],
       "@lingo.dev/_react/react-router": ["../react/src/react-router"],
       "@lingo.dev/_react/rsc": ["../react/src/rsc"]
