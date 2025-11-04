@@ -16,6 +16,9 @@
     "baseUrl": ".", 
     "paths": {
       "@lingo.dev/*":["../*/src"],
+      "@lingo.dev/_compiler": ["../_compiler/src"],
+      "@lingo.dev/_locales": ["../_locales/src"],
+      "@lingo.dev/_react": ["../react/src"],
        "@lingo.dev/_spec": ["../spec/src"],
        "@lingo.dev/_sdk": ["../sdk/src"],
       "@lingo.dev/_react/client": ["../react/src/client"],
