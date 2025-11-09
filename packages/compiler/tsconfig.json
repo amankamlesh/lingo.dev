@@ -24,10 +24,11 @@
     "src/*.ts",
     "src/lib/**/*.ts",
     "src/utils/**/*.ts",
+    "src/**/*.ts",
     "src/**/*.tsx",
     "types",
     "../spec/src/**/*.ts",
-    
+
     "../sdk/src/**/*.ts"
   ],
   "exclude": ["src/**/*.spec.ts", "src/**/*.spec.tsx"]
